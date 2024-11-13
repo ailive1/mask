@@ -1,0 +1,191 @@
+body {
+  font-family: "Roboto", "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(24, 24, 34);
+  color: whitesmoke;
+}
+
+#uploadlabel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: clamp(16px, 4vw, 36px); /* Minimum 16px, responsive 4vw, maximum 36px */
+  color: rgb(228, 226, 226);
+  padding: 1em;
+  width: 90%;
+  max-width: 600px;
+  max-height: 30vh;
+  background-color: rgb(52, 57, 107);
+  transition: 0.3s;
+  border-radius: 15px;
+  cursor: pointer;
+  margin: 0 auto; /* Center horizontally */
+  border: 2px dashed rgb(228, 226, 226); /* Add dashed border */
+}
+
+
+/* Ensure vertical centering on all devices */
+#uploader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 1000px) {
+  #uploadlabel {
+    font-size: 5vw; /* Adjust font size for mobile */
+    max-height: 60vh; /* Adjust max height for better view on mobile */
+  }
+}
+
+#uploadlabel:hover {
+  background-color: rgb(71, 77, 146);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 20px;
+  max-height: 80vh;
+}
+
+img:hover {
+  background-color: white;
+}
+
+#colorSelect {
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+#undo {
+  display: inline-block;
+  vertical-align: top;
+}
+
+#alpha,
+#zoom,
+#brushSize,
+#hue,
+#textSize,
+#angle {
+  display: inline-block;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: rgb(71, 77, 146);
+  outline: none;
+  height: 10px;
+  border: none;
+  opacity: 0.5;
+  width: 70%;
+  padding: 10px;
+  transition: 0.5s;
+}
+
+#alpha:hover,
+#zoom:hover,
+#brushSize:hover,
+#hue:hover,
+#textSize:hover,
+#angle:hover {
+  background-color: rgb(236, 212, 192);
+}
+
+#alpha::-webkit-slider-thumb,
+#zoom::-webkit-slider-thumb,
+#brushSize::-webkit-slider-thumb,
+#hue::-webkit-slider-thumb,
+#textSize::-webkit-slider-thumb,
+#angle::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgb(224, 146, 82);
+  width: 5px;
+  height: 20px;
+}
+
+#sliderValue {
+  display: inline-block;
+  line-height: 0;
+  margin-top: 0.75em;
+  vertical-align: top;
+  font-size: 1.5em;
+}
+
+#tools {
+  border: 2px solid #555;
+  border-radius: 5px;
+  padding: 5px 5px 35px 5px;
+  background: rgb(52, 57, 107);
+  line-height: 30px;
+  width: 90%;
+  margin: 0 auto 20px auto; 
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  align-items: center;
+}
+
+/* Common styles for buttons */
+#tools button {
+  background-color: rgb(53, 44, 95);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  transition: 0.5s;
+  margin: 5px;
+  font-size: 16px;
+}
+@media (max-width: 1000px) {
+  #tools button {
+    font-size: 26px;
+    padding: 15px;
+  }
+}
+
+#tools button:hover {
+  background-color: rgb(71, 77, 146);
+}
+
+/* Fieldset styles */
+fieldset {
+  border: 2px solid #555;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  background: rgb(52, 57, 107);
+  width: 100%;
+}
+
+#preview {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Centering buttons in one line */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.color.night.button {
+  flex: 1;
+  max-width: 250px; /* Adjust this value to control button width */
+}

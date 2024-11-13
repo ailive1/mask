@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'>
+  <link rel="stylesheet" href="stylesheet.css">
+  <link rel="stylesheet" href="nouislider.min.css">
+  <script src="jquery.min.js"></script>
+  <script src="fabric.min.js"></script>
+  <script src="nouislider.min.js"></script>
+  <script src="FileSaver.min.js"></script>
+  <title>Image Masker</title>
+  <link rel="icon" href="images/favicon.png">
+</head>
+<body class="color night">
+  <script>
+    document.body.style.backgroundColor = "rgb(24, 24, 34)";
+  </script>
+  <div id="uploader">
+    <label class="color night" id="uploadlabel" for="imageUpload" style="cursor:pointer;">
+      单击此处上传、粘贴或拖放图片
+	  <br/>
+      Paste, drag & drop or click here to upload an image
+    </label>
+    <input type="file" id="imageUpload" style="display: none;" onchange="uploadImage(event)">
+  </div>
+  
+  <div id="container">
+    <div id="toolsDiv" style="display: none;">
+	  <fieldset class="color night" id="tools">
+		<legend>蒙版工具(Tools)</legend>
+		<div class="button-container">
+		  <button class="color night button" id="eraserButton" onclick="eraser()">橡皮<br/>(Eraser)</button>
+		  <button class="color night button" id="brushButton" onclick="brush()">画笔<br/>(Brush)</button>
+		  <button class="color night button" id="disableDrawing" onclick="disableDrawingMode()">移动蒙版<br/>(Move mask)</button>
+		</div>
+		
+		<div class="button-container">
+		  <button class="color night button" id="deleteObject" onclick="deleteObject()">删除蒙版<br/>(Delete)</button>
+		  <button type="button" class="color night button" id="undo" onclick="undo()">撤销<br/>(Undo)</button>
+		  <button class="color night button" id="downloadMask" onclick="downloadMask()">下载蒙版<br/>(Download Mask)</button>
+		</div>
+		<div id="brush" class="button-container">
+		  笔刷大小(Brush size): 
+		  <div id="brushSize" class="sliders"></div>
+		</div>
+	  </fieldset>
+	</div>
+    <div id="preview">
+      <div id="previewImage">
+        <img id='imagePreview'>
+      </div>
+      <div id="canvasDiv">
+        <canvas id='canvas'></canvas>
+      </div>
+    </div>
+  </div>
+  <script src="js/masker.js"></script>
+</body>
+</html>
