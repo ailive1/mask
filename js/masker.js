@@ -171,7 +171,7 @@ $(document).on("keydown", function (e) {
 
 //function to convert hex color to rgb
 function hexToRgb(hex) {
-  var opacity = 0.7;//document.getElementById("brushOpacity").value / 100;
+  var opacity = 1;
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   var output =
     "rgba(" +
