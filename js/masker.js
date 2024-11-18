@@ -20,7 +20,7 @@ uploadArea.ondrop = function (e) {
  var slider = document.getElementById('brushSize');
 
   noUiSlider.create(slider, {
-    start: 30,
+    start: 40,
 	step: 5,
     range: {
       'min': 10,
@@ -243,7 +243,7 @@ function downloadMask() {
   tempCanvas.height = canvas.height;
   var tempContext = tempCanvas.getContext('2d');
 
-  tempContext.fillStyle = 'rgba(0, 0, 0, 0)';
+  tempContext.fillStyle = 'rgba(255, 255, 255, 1)';
   tempContext.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
 
   canvas.forEachObject(function(obj) {
