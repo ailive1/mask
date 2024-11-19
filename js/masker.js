@@ -20,7 +20,7 @@ uploadArea.ondrop = function (e) {
  var slider = document.getElementById('brushSize');
 
   noUiSlider.create(slider, {
-    start: 40,
+    start: 50,
 	step: 5,
     range: {
       'min': 10,
