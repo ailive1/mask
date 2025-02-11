@@ -238,20 +238,37 @@ function deleteObject() {
 function downloadMask() {
   var hasMask = false;
 
+  // 使用原图的宽度和高度来创建临时画布
   var tempCanvas = document.createElement('canvas');
-  tempCanvas.width = canvas.width;
-  tempCanvas.height = canvas.height;
+  tempCanvas.width = imgWidth;  // 使用原图宽度
+  tempCanvas.height = imgHeight;  // 使用原图高度
   var tempContext = tempCanvas.getContext('2d');
 
+  // 填充背景色为白色
   tempContext.fillStyle = 'rgba(255, 255, 255, 1)';
   tempContext.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
 
+  // 遍历画布上的所有对象，并渲染到临时画布
   canvas.forEachObject(function(obj) {
     if (!obj.excludeFromExport) { 
       hasMask = true;
-      obj.clone(function(clonedObj) {
-        clonedObj.render(tempContext);
+      
+      // 计算缩放比例，确保对象大小与画布一致
+      var scaleX = imgWidth / canvas.width;
+      var scaleY = imgHeight / canvas.height;
+
+      var clonedObj = fabric.util.object.clone(obj);
+
+      // 应用缩放
+      clonedObj.set({
+        scaleX: clonedObj.scaleX * scaleX,
+        scaleY: clonedObj.scaleY * scaleY,
+        left: clonedObj.left * scaleX,  // 调整位置
+        top: clonedObj.top * scaleY     // 调整位置
       });
+
+      // 渲染对象到临时画布
+      clonedObj.render(tempContext);
     }
   });
 
@@ -260,6 +277,7 @@ function downloadMask() {
     return;
   }
 
+  // 转换为 Blob 并下载
   tempCanvas.toBlob(function(blob) {
     saveAs(blob, 'mask.png');
   });
