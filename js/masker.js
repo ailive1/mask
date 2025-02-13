@@ -252,23 +252,38 @@ function downloadMask() {
   canvas.forEachObject(function(obj) {
     if (!obj.excludeFromExport) { 
       hasMask = true;
-      
+
       // 计算缩放比例，确保对象大小与画布一致
       var scaleX = imgWidth / canvas.width;
       var scaleY = imgHeight / canvas.height;
 
-      var clonedObj = fabric.util.object.clone(obj);
+      // 保存对象的原始值
+      var originalScaleX = obj.scaleX;
+      var originalScaleY = obj.scaleY;
+      var originalLeft = obj.left;
+      var originalTop = obj.top;
 
-      // 应用缩放
-      clonedObj.set({
-        scaleX: clonedObj.scaleX * scaleX,
-        scaleY: clonedObj.scaleY * scaleY,
-        left: clonedObj.left * scaleX,  // 调整位置
-        top: clonedObj.top * scaleY     // 调整位置
+      // 修改对象的大小和位置
+      obj.set({
+        scaleX: obj.scaleX * scaleX,
+        scaleY: obj.scaleY * scaleY,
+        left: obj.left * scaleX,  // 调整位置
+        top: obj.top * scaleY     // 调整位置
       });
 
       // 渲染对象到临时画布
-      clonedObj.render(tempContext);
+      obj.render(tempContext);
+
+      // 下载完成后恢复对象的原始值
+      obj.set({
+        scaleX: originalScaleX,
+        scaleY: originalScaleY,
+        left: originalLeft,
+        top: originalTop
+      });
+
+      // 更新对象的坐标
+      obj.setCoords();
     }
   });
 
@@ -280,7 +295,9 @@ function downloadMask() {
   // 转换为 Blob 并下载
   tempCanvas.toBlob(function(blob) {
     saveAs(blob, 'mask.png');
+
+    // 下载完成后恢复画布状态
+    canvas.renderAll();
+    brush();
   });
 }
-
-
